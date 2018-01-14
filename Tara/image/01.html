@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>第1道代码题</title>
+<style>
+	*{margin:0;padding:0;list-style:none;}
+	.content{ margin:10px 20px;}
+	h5{font-size:14px;line-height:30px;height:30px;color:green;}
+	.box1 input{width:200px;height:20px;line-height:20px;border:1px solid green;border-radius:5px;}
+	p{height:30px;width:200px;font-size:14px;color:#BC4442;}
+	.sub{width:60px;height:30px;background-color:#3277B3;border:1px solid #3277B3;color:white;border-radius:5px;}
+	#di{
+		display: none;
+	}
+	#di2{
+		display: none;
+	}
+</style>
+<script>
+/****************请在此编写js代码*******************/
+window.onload=function () {
+    //获取表单
+    var name=document.getElementById("username");
+   	//湖区隐藏盒子
+    var di=document.getElementById("di");
+//    获取邮箱
+	var you =document.getElementById("email");
+	//获取邮箱隐藏
+	var di1=document.getElementById("di1");
+	//获取底下按钮
+	var btn=document.getElementById("sub");
+	//获取密码表单
+	var mi=document.getElementById("pass");
+	//获取按钮隐藏
+	var di2=document.getElementById("di2");
+	//获取密码隐藏
+	var di4=document.getElementById("di4");
+	//阻止表单提交
+	function btt() {
+        btn.onclick=function () {
+            di2.style.display="block";
+            return false
+
+        };
+    }
+    //进入页面阻止表单提交
+    btt();
+    //用户名
+    name.onblur=function () {
+//        获取表单提交至
+		var val=this.value;
+//		判断
+		if (val.length<1){
+			di.style.display="block";
+            di.innerHTML="输入值不能为空";
+			btt();
+			return
+		}else if(val.length<4){
+            di.innerHTML="字符长度不符合标准";
+			di.style.display="block";
+            btt();
+		}else if (val.length>10){
+            di.innerHTML="字符长度不符合标准";
+            di.style.display="block";
+            btt();
+		} else {
+		    di.style.display="none";
+            btn.onclick=function () {
+                di2.style.display="none";
+            };
+		}
+
+    };
+    //邮箱
+	you.onblur=function () {
+		var val=this.value;
+        if (val.length<1){
+            di1.style.display="block";
+            di1.innerHTML="输入值不能为空";
+            btt();
+            return
+        }else if (!/[1-9a-zA-Z][0-9A-Za-z.-]+[@][0-9A-Za-z_]+([.][A-Za-z.]){1,2}/.test(val)){
+            di1.style.display="block";
+            di1.innerHTML="输入类型不符合标准";
+            btt();
+		}else {
+            di1.style.display="none";
+            btn.onclick=function () {
+                di2.style.display="none";
+            };
+		}
+    };
+
+    //密码
+	mi.onblur=function () {
+		var val=this.value;
+        if (val.length<1){
+            di4.style.display="block";
+            di4.innerHTML="输入值不能为空";
+            btt();
+            return
+        }else if(val.length<6) {
+            di4.innerHTML="密码长度不符合标准";
+            di4.style.display="block";
+            btt();
+		}else {
+            di4.style.display="none";
+            btn.onclick=function () {
+                di2.style.display="none";
+            };
+		}
+
+    }
+
+
+
+}
+
+
+
+</script>
+</head>
+<body>
+	<form action="register.php" method="post" id="form">
+	<div class="content">
+		<h5>用户名</h5>
+		<div class="box1" id="box1">
+			<input type="text" name="username" id="username" /><p></p>
+			<div id="di">输入值不能为空</div>
+		</div>
+		<h5>电子邮箱</h5>
+		<div class="box1">
+			<input type="text" name="email" id="email" /><p></p>
+		</div>
+		<div id="di1"></div>
+		<h5>密码</h5>
+		<div class="box1">
+			<input type="password" name="pass" id="pass" /><p></p>
+		</div>
+		<div id="di4"></div>
+		<br/>
+		<input type="submit" value="注册" class="sub" id="sub"/>
+	</div>
+	</form>
+	<div id="di2">不符合标注不予提交</div>
+</body>
+</html>
